@@ -3,6 +3,7 @@ package Mapper;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.xnw.dao.mapper.test.StudentMapper;
 import com.xnw.dao.model.test.Student;
+
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+
 import java.util.Date;
 
 /**
@@ -19,7 +21,7 @@ import java.util.Date;
  * Description:
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:application.xml"})
+@ContextConfiguration(locations = {"classpath:application.xml"})
 public class MapperTest {
 
     @Resource

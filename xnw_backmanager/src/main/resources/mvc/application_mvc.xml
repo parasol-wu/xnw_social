@@ -17,37 +17,37 @@
     <context:component-scan base-package="com.xnw.web" />
     <mvc:annotation-driven />
 
-    <!-- velocity -->
-    <!--<bean id="velocityConfig"-->
-          <!--class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">-->
-        <!--<property name="resourceLoaderPath" value="/WEB-INF/pages/velocity"/>-->
-        <!--<property name="velocityProperties">-->
-            <!--<props>-->
-                <!--<prop key="input.encoding">utf-8</prop>-->
-                <!--<prop key="output.encoding">utf-8</prop>-->
-            <!--</props>-->
-        <!--</property>-->
-    <!--</bean>-->
-    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">-->
-        <!--<property name="cache" value="true"/>-->
-        <!--<property name="prefix" value=""/>-->
-        <!--&lt;!&ndash; 取消缓存 &ndash;&gt;-->
-        <!--&lt;!&ndash;<property name="cacheLimit" value="-1"/>&ndash;&gt;-->
-        <!--<property name="layoutUrl" value="layout/layout.vm"/>-->
+     <!--velocity -->
+    <bean id="velocityConfig"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/views/"/>
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">utf-8</prop>
+                <prop key="output.encoding">utf-8</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <!-- 取消缓存 -->
+        <!--<property name="cacheLimit" value="-1"/>-->
+        <property name="layoutUrl" value="layout/layout.vm"/>
         <!--<property name="toolboxConfigLocation" value="/WEB-INF/pages/velocity/velocity-toolbox.xml"/>-->
-        <!--<property name="suffix" value=".vm"/>-->
-        <!--<property name="contentType" value="text/html; charset=utf-8"></property>-->
-        <!--<property name="exposeSpringMacroHelpers" value="true"/>-->
-        <!--<property name="allowSessionOverride" value="true"/>-->
-        <!--<property name="allowRequestOverride" value="true"/>-->
-        <!--<property name="exposeSessionAttributes" value="true"/>-->
-        <!--<property name="requestContextAttribute" value="rc"/>-->
-        <!--<property name="exposeRequestAttributes" value="true"/>-->
-        <!--<property name="redirectContextRelative" value="false"/>-->
-        <!--<property name="viewClass"-->
-                  <!--value="org.springframework.web.servlet.view.velocity.VelocityLayoutView"/>-->
-        <!--<property name="order" value="0"/>-->
-    <!--</bean>-->
+        <property name="suffix" value=".vm"/>
+        <property name="contentType" value="text/html; charset=utf-8"></property>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="allowSessionOverride" value="true"/>
+        <property name="allowRequestOverride" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="requestContextAttribute" value="rc"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="redirectContextRelative" value="false"/>
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.velocity.VelocityLayoutView"/>
+        <property name="order" value="0"/>
+    </bean>
 
     <!-- jsonView -->
     <bean
@@ -59,5 +59,8 @@
             </list>
         </property>
     </bean>
+
+    <mvc:resources location="/WEB-INF/static/" mapping="/static/**"/>
+
 
 </beans>

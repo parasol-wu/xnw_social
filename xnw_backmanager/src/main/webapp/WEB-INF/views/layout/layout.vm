@@ -1,0 +1,31 @@
+###if($pjax == 1)
+####    #parse("/common/nav-tab.vm")
+##    $screen_content
+###else
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    #parse("/common/header_css.vm")
+    #parse("/common/html_head.vm")
+
+</head>
+<body>
+<div id="layout" class="ch-container">
+
+    #parse("/common/header.vm")
+
+    #parse("/common/left_side.vm")
+
+    <div class="main-content">
+        $screen_content
+    </div>
+    #parse("/common/footer.vm")
+
+
+</div>
+
+    #parse("/common/common_js.vm")
+
+</body>
+</html>
+###end
