@@ -20,11 +20,11 @@ import java.util.Properties;
 public class ShardingInterceptor implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
         //TODO  mybatis拦截器
-        return null;
+        return invocation.proceed();
     }
 
     public Object plugin(Object o) {
-        return null;
+        return o;
     }
 
     public void setProperties(Properties properties) {

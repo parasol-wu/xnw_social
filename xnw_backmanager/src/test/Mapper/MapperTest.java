@@ -1,5 +1,6 @@
 package Mapper;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.xnw.dao.mapper.test.StudentMapper;
 import com.xnw.dao.model.test.Student;
 import org.apache.ibatis.session.SqlSession;
@@ -12,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by BaoCai on 17/9/2.
@@ -25,9 +25,6 @@ public class MapperTest {
     @Resource
     private StudentMapper studentMapper;
 
-    @Autowired
-    private SqlSessionFactoryBean sqlSessionFactory;
-
     @Test
     public void testMapper() throws Exception {
         Student student = new Student();
@@ -36,9 +33,6 @@ public class MapperTest {
         student.setCreatedAt(new Date());
         student.setUpdatedAt(new Date());
 
-        SqlSession session = sqlSessionFactory.getObject().openSession();
-
-        List object = (List) session.selectOne("select * from student where id = 9");
         studentMapper.insert(student);
     }
 }
