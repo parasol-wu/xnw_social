@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/task
+      	   http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+
+    <context:component-scan base-package="com.xnw.dao"/>
+
+    <bean id="abstractDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          abstract="true" destroy-method="close">
+        <property name="driverClass" value="${connection_driver_class}"/>
+        <property name="idleConnectionTestPeriod"
+                  value="${jdbc_pool_c3p0_idle_connection_test_period}"/>
+        <property name="preferredTestQuery" value="${jdbc_pool_c3p0_preferred_test_query}"/>
+        <property name="maxIdleTime" value="${jdbc_pool_c3p0_max_idle_time}"/>
+        <property name="initialPoolSize" value="${jdbc_pool_c3p0_initial_pool_size}"/>
+        <property name="acquireIncrement" value="${jdbc_pool_c3p0_acquire_increment}"/>
+        <property name="acquireRetryAttempts" value="${jdbc_pool_c3p0_acquire_retry_attempts}"/>
+    </bean>
+
+    <bean id="defaultDataSource" parent="abstractDataSource">
+        <property name="user" value="${jdbc_connection_username}"/>
+        <property name="password" value="${jdbc_connection_password}"/>
+        <property name="jdbcUrl" value="${jdbc_connection_url}"/>
+        <property name="maxPoolSize" value="${jdbc_pool_c3p0_max_size}"/>
+        <property name="minPoolSize" value="${jdbc_pool_c3p0_min_size}"/>
+    </bean>
+
+    <!-- 动态数据源，实现分库 -->
+    <bean id="dataSource" class="com.xnw.persistence.shard.PartitionDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <entry key="default" value-ref="defaultDataSource"/>
+            </map>
+        </property>
+        <property name="defaultTargetDataSource" ref="defaultDataSource"/>
+    </bean>
+
+    <bean id="mainDataSource" class="net.bull.javamelody.SpringDataSourceFactoryBean">
+        <property name="targetName" value="dataSource"/>
+    </bean>
+
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource">
+            <ref bean="mainDataSource"/>
+        </property>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="mainDataSource"/>
+        <property name="configLocation" value="classpath:dao/sqlmap-config.xml"/>
+        <property name="mapperLocations" value="classpath*:mapper/**/*.xml"/>
+        <property name="plugins">
+            <array>
+                <bean id="shardingInterceptor" class="com.xnw.persistence.interceptors.ShardingInterceptor"/>
+            </array>
+        </property>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.xnw.dao.mapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="mapperInterceptor" class="com.xnw.persistence.interceptors.MapperInterceptor"/>
+    <aop:config>
+        <aop:pointcut id="allManagerMethod" expression="execution(* com.xnw.dao.mapper.*.*(..))" />
+        <aop:advisor pointcut-ref="allManagerMethod"
+                     advice-ref="mapperInterceptor"/>
+    </aop:config>
+    <!--单数据源事务-->
+    <bean name="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="defaultDataSource">
+        </property>
+        <!--<qualifier value="dtcore"></qualifier>-->
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+
+</beans>
