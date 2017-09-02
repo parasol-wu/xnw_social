@@ -75,6 +75,11 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
+    <!-- mybatis spring sqlSessionTemplate,使用时直接让spring注入即可 -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+
     <bean id="mapperInterceptor" class="com.xnw.persistence.interceptors.MapperInterceptor"/>
     <aop:config>
         <aop:pointcut id="allManagerMethod" expression="execution(* com.xnw.dao.mapper.*.*(..))" />
