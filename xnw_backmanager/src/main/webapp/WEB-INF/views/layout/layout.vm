@@ -12,6 +12,8 @@
 <body>
 <div id="layout" class="ch-container">
 
+
+
     #parse("/common/header.vm")
 
     #parse("/common/left_side.vm")
