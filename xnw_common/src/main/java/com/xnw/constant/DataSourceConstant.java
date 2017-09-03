@@ -17,5 +17,6 @@ public class DataSourceConstant {
     public static final String WWW = "www";
     public static final String REAL = "real";
     public static final String AD = "ad";
+    public static final String SYS = "sys";
 }
 

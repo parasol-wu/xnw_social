@@ -1,8 +1,6 @@
 package Mapper;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import com.xnw.dao.mapper.test.StudentMapper;
-import com.xnw.dao.model.test.Student;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -23,18 +21,4 @@ import java.util.Date;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:application.xml"})
 public class MapperTest {
-
-    @Resource
-    private StudentMapper studentMapper;
-
-    @Test
-    public void testMapper() throws Exception {
-        Student student = new Student();
-        student.setName("nie datou");
-        student.setSex(2);
-        student.setCreatedAt(new Date());
-        student.setUpdatedAt(new Date());
-
-        studentMapper.insert(student);
-    }
 }

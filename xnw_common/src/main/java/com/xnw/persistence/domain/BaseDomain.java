@@ -1,5 +1,6 @@
 package com.xnw.persistence.domain;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public abstract class BaseDomain<T>  {
@@ -22,13 +23,13 @@ public abstract class BaseDomain<T>  {
      *
      * @param createdAt
      */
-    public abstract void setCreatedAt(Date createdAt);
+    public abstract void setCreatedAt(LocalDateTime createdAt);
 
     /**
      * 设置修改时间
      *
      * @param updatedAt
      */
-    public abstract void setUpdatedAt(Date updatedAt);
+    public abstract void setUpdatedAt(LocalDateTime updatedAt);
 }
 

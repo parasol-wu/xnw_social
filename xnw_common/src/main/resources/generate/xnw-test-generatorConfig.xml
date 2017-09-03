@@ -26,7 +26,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/test" userId="root"
+                        connectionURL="jdbc:mysql://localhost:3306/xnw_sys" userId="root"
                         password="root"/>
 
         <javaModelGenerator targetPackage="com.xnw.persistence.model"
@@ -37,10 +37,36 @@
 
 
 
-        <table tableName="student" domainObjectName="test.Student">
-            <property name="partitionedTable" value="test"/>
+        <table tableName="xnw_sys_function" domainObjectName="system.SysFunction">
+            <property name="partitionedTable" value="sys"/>
             <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+            <columnOverride column="created_at" javaType="java.time.LocalDateTime"/>
+            <columnOverride column="updated_at" javaType="java.time.LocalDateTime"/>
         </table>
+
+        <table tableName="xnw_sys_role" domainObjectName="system.SysRole">
+            <property name="partitionedTable" value="sys"/>
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+            <columnOverride column="created_at" javaType="java.time.LocalDateTime"/>
+            <columnOverride column="updated_at" javaType="java.time.LocalDateTime"/>
+        </table>
+
+        <table tableName="xnw_sys_user" domainObjectName="system.SysUser">
+            <property name="partitionedTable" value="sys"/>
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+            <columnOverride column="created_at" javaType="java.time.LocalDateTime"/>
+            <columnOverride column="updated_at" javaType="java.time.LocalDateTime"/>
+        </table>
+
+        <table tableName="xnw_sys_role_function" domainObjectName="system.SysRoleFunction">
+            <property name="partitionedTable" value="sys"/>
+        </table>
+
+        <table tableName="xnw_sys_user_role" domainObjectName="system.SysUserRole">
+            <property name="partitionedTable" value="sys"/>
+        </table>
+
+        <!--<javaTypeResolver />-->
 
 
     </context>

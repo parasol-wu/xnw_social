@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xnw.dao.mapper.test.StudentMapper" >
-  <resultMap id="BaseResultMap" type="com.xnw.dao.model.test.Student" >
+<mapper namespace="com.xnw.persistence.mapper.system.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.xnw.persistence.model.system.SysRole" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
     <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
     <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="updated_by" property="updatedBy" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,15 +70,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, sex, created_at, updated_at
+    id, role_name, introduce, created_at, updated_at, created_by, updated_by, state
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xnw.dao.model.test.StudentConditions" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xnw.persistence.model.system.SysRoleConditions" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from student
+    from xnw_sys_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,33 +90,35 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from student
+    from xnw_sys_role
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from student
+    delete from xnw_sys_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.xnw.dao.model.test.StudentConditions" >
-    delete from student
+  <delete id="deleteByExample" parameterType="com.xnw.persistence.model.system.SysRoleConditions" >
+    delete from xnw_sys_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.xnw.dao.model.test.Student" useGeneratedKeys="true" keyProperty="id" >
-    insert into student (name, sex, created_at, 
-      updated_at)
-    values (#{name,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.xnw.persistence.model.system.SysRole" useGeneratedKeys="true" keyProperty="id" >
+    insert into xnw_sys_role (role_name, introduce, created_at, 
+      updated_at, created_by, updated_by, 
+      state)
+    values (#{roleName,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}, #{updatedBy,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.xnw.dao.model.test.Student" useGeneratedKeys="true" keyProperty="id" >
-    insert into student
+  <insert id="insertSelective" parameterType="com.xnw.persistence.model.system.SysRole" useGeneratedKeys="true" keyProperty="id" >
+    insert into xnw_sys_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        name,
+      <if test="roleName != null" >
+        role_name,
       </if>
-      <if test="sex != null" >
-        sex,
+      <if test="introduce != null" >
+        introduce,
       </if>
       <if test="createdAt != null" >
         created_at,
@@ -121,13 +126,22 @@
       <if test="updatedAt != null" >
         updated_at,
       </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="updatedBy != null" >
+        updated_by,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=INTEGER},
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
       </if>
       <if test="createdAt != null" >
         #{createdAt,jdbcType=TIMESTAMP},
@@ -135,25 +149,34 @@
       <if test="updatedAt != null" >
         #{updatedAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.xnw.dao.model.test.StudentConditions" resultType="java.lang.Integer" >
-    select count(*) from student
+  <select id="countByExample" parameterType="com.xnw.persistence.model.system.SysRoleConditions" resultType="java.lang.Integer" >
+    select count(*) from xnw_sys_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update student
+    update xnw_sys_role
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.roleName != null" >
+        role_name = #{record.roleName,jdbcType=VARCHAR},
       </if>
-      <if test="record.sex != null" >
-        sex = #{record.sex,jdbcType=INTEGER},
+      <if test="record.introduce != null" >
+        introduce = #{record.introduce,jdbcType=VARCHAR},
       </if>
       <if test="record.createdAt != null" >
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
@@ -161,30 +184,42 @@
       <if test="record.updatedAt != null" >
         updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.createdBy != null" >
+        created_by = #{record.createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedBy != null" >
+        updated_by = #{record.updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update student
+    update xnw_sys_role
     set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=INTEGER},
+      role_name = #{record.roleName,jdbcType=VARCHAR},
+      introduce = #{record.introduce,jdbcType=VARCHAR},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      created_by = #{record.createdBy,jdbcType=VARCHAR},
+      updated_by = #{record.updatedBy,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xnw.dao.model.test.Student" >
-    update student
+  <update id="updateByPrimaryKeySelective" parameterType="com.xnw.persistence.model.system.SysRole" >
+    update xnw_sys_role
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=INTEGER},
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
       </if>
       <if test="createdAt != null" >
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -192,15 +227,27 @@
       <if test="updatedAt != null" >
         updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedBy != null" >
+        updated_by = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xnw.dao.model.test.Student" >
-    update student
-    set name = #{name,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.xnw.persistence.model.system.SysRole" >
+    update xnw_sys_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      updated_by = #{updatedBy,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <sql id="paginationSql" >

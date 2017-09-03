@@ -14,7 +14,7 @@ import static com.xnw.utils.StringUtil.isNotEmpty;
 public class ShardTablePlugin extends BasePlugin {
 
 	private static final DataSourceConstant DATA_SOURCE = new DataSourceConstant();
-	private static final String DATA_SOURCE_PRE = "DataSource.";
+	private static final String DATA_SOURCE_PRE = "DataSourceConstant.";
 	private static final String FULL_DATE_TYPE = "java.util.Date";
 	private static final String SHARD_TABLE_SUFIX_PATTERN = "_(\\d{4}_\\d{2}|\\d{1,3})";
 	private String tableName = null;
