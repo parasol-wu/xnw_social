@@ -72,7 +72,7 @@
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.xnw.persistence.mapper"/>
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
     </bean>
 
     <bean id="mapperInterceptor" class="com.xnw.persistence.interceptors.MapperInterceptor"/>

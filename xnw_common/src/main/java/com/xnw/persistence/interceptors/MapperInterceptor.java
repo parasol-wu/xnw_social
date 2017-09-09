@@ -14,6 +14,8 @@ import java.util.Date;
  * Description:
  */
 public class MapperInterceptor implements MethodBeforeAdvice {
+
+    @Override
     public void before(Method method, Object[] objects, Object o) throws Throwable {
         Class<?> entityClass = method.getDeclaringClass();
 

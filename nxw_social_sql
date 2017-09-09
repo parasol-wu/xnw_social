@@ -2,19 +2,19 @@ create table xnw_sys_user(
 	id int(10) PRIMARY KEY AUTO_INCREMENT COMMENT "id",
 	
 	user_name varchar(20) not null default "" COMMENT "登录名",
-	nick_name varchar(20) not null default "" COMMENT "昵称",
-	real_name varchar(20) not null default "" COMMENT "真实姓名",
+	nick_name varchar(20)  default "" COMMENT "昵称",
+	real_name varchar(20)  default "" COMMENT "真实姓名",
 	password varchar(20) not null default "" COMMENT "密码",
-	login_ip varchar(16) not null default "00.00.00.00" comment "ip地址",
-	login_times int(6) not null default 1 comment "登录次数",
-	email varchar(20) not null default "" comment "邮箱",
-	mobile varchar(13) not null default "" comment "电话",
+	login_ip varchar(16)  default "00.00.00.00" comment "ip地址",
+	login_times int(6)  default 1 comment "登录次数",
+	email varchar(20)  default "" comment "邮箱",
+	mobile varchar(13)  default "" comment "电话",
 	
-	created_at datetime not null default "2017-01-01 00:00:00" COMMENT "创建日期",
-	updated_at datetime not null default "2017-01-01 00:00:00" COMMENT "修改日期",
-	created_by varchar(20) not null default "" comment "创建人",
-	updated_by varchar(20) not null default "" comment "修改人员",
-	state int(1) not null default 1 comment "0:无效，1有效"
+	created_at datetime  default "2017-01-01 00:00:00" COMMENT "创建日期",
+	updated_at datetime  default "2017-01-01 00:00:00" COMMENT "修改日期",
+	created_by varchar(20)  default "" comment "创建人",
+	updated_by varchar(20)  default "" comment "修改人员",
+	state int(1)  default 1 comment "0:无效，1有效"
 )ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统用户表';
 
 
@@ -23,13 +23,13 @@ create table xnw_sys_role(
 	id int(10) PRIMARY KEY AUTO_INCREMENT COMMENT "id",
 	
 	role_name varchar(20) not null default "" comment "角色名称",
-	introduce varchar(100) not null default "" comment "介绍",
+	introduce varchar(100)  default "" comment "介绍",
 	
-	created_at datetime not null default "2017-01-01 00:00:00" COMMENT "创建日期",
-	updated_at datetime not null default "2017-01-01 00:00:00" COMMENT "修改日期",
-	created_by varchar(20) not null default "" comment "创建人",
-	updated_by varchar(20) not null default "" comment "修改人员",
-	state int(1) not null default 1 comment "0:无效，1有效"
+	created_at datetime  default "2017-01-01 00:00:00" COMMENT "创建日期",
+	updated_at datetime  default "2017-01-01 00:00:00" COMMENT "修改日期",
+	created_by varchar(20)  default "" comment "创建人",
+	updated_by varchar(20)  default "" comment "修改人员",
+	state int(1)  default 1 comment "0:无效，1有效"
 )ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统角色表';
 
 
@@ -39,16 +39,16 @@ create table xnw_sys_function(
 	id int(10) PRIMARY KEY AUTO_INCREMENT COMMENT "id",
 	
 	function_name varchar(20) not null unique default "" comment "功能名称",
-	function_url varchar(100) not null default "" comment "请求路径",
+	function_url varchar(100)  default "" comment "请求路径",
 	function_parent_id int(10) default null comment "父菜单Id",
-	introduce varchar(100) not null default "" comment "简介",
+	introduce varchar(100)  default "" comment "简介",
 	level int(3) default 0 comment "排序",
 	
-	created_at datetime not null default "2017-01-01 00:00:00" COMMENT "创建日期",
-	updated_at datetime not null default "2017-01-01 00:00:00" COMMENT "修改日期",
-	created_by varchar(20) not null default "" comment "创建人",
-	updated_by varchar(20) not null default "" comment "修改人员",
-	state int(1) not null default 1 comment "0:无效，1有效"
+	created_at datetime  default "2017-01-01 00:00:00" COMMENT "创建日期",
+	updated_at datetime  default "2017-01-01 00:00:00" COMMENT "修改日期",
+	created_by varchar(20)  default "" comment "创建人",
+	updated_by varchar(20)  default "" comment "修改人员",
+	state int(1) default 1 comment "0:无效，1有效"
 )ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='功能模块表';
 
 
