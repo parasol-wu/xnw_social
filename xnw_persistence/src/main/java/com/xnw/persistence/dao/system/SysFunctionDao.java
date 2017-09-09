@@ -12,8 +12,15 @@ import org.springframework.stereotype.Repository;
  * Description:
  */
 @Repository
-public class SysFunctionDao extends BaseDao<SysFunction>{
+public class SysFunctionDao{
     @Autowired
     private SysFunctionMapper sysFunctionMapper;
-    public SysFunctionDao(){this.setBaseMapper(sysFunctionMapper);}
+
+    public void insert(SysFunction  model){
+        sysFunctionMapper.insert(model);
+    }
+
+    public SysFunction findById(Integer id) {
+        return sysFunctionMapper.selectByPrimaryKey(id);
+    }
 }

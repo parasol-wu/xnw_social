@@ -1,7 +1,6 @@
 package com.xnw.persistence.mapper.system;
 
 import com.xnw.constant.DataSourceConstant;
-import com.xnw.persistence.mapper.BaseMapper;
 import com.xnw.persistence.model.system.SysUser;
 import com.xnw.persistence.model.system.SysUserConditions;
 import com.xnw.persistence.shard.PartitionedTable;
@@ -9,7 +8,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 @PartitionedTable(DataSourceConstant.SYS)
-public interface SysUserMapper extends BaseMapper {
+public interface SysUserMapper {
     int countByExample(SysUserConditions example);
 
     int deleteByExample(SysUserConditions example);

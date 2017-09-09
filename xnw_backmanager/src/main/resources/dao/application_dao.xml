@@ -16,7 +16,7 @@
       	   http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
 
-    <context:component-scan base-package="com.xnw.dao"/>
+    <context:component-scan base-package="com.xnw.persistence"/>
 
     <bean id="abstractDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           abstract="true" destroy-method="close">
@@ -71,13 +71,13 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.xnw.dao.mapper"/>
+        <property name="basePackage" value="com.xnw.persistence.mapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
     <bean id="mapperInterceptor" class="com.xnw.persistence.interceptors.MapperInterceptor"/>
     <aop:config>
-        <aop:pointcut id="allManagerMethod" expression="execution(* com.xnw.dao.mapper.*.*(..))" />
+        <aop:pointcut id="allManagerMethod" expression="execution(* com.xnw.persistence.mapper.*.*(..))" />
         <aop:advisor pointcut-ref="allManagerMethod"
                      advice-ref="mapperInterceptor"/>
     </aop:config>
