@@ -33,7 +33,10 @@
                             targetProject="xnw_persistence/src/main/java"/>
         <sqlMapGenerator targetPackage="mapper" targetProject="xnw_persistence/src/main/resources"/>
         <javaClientGenerator targetPackage="com.xnw.persistence.mapper"
-                             targetProject="xnw_persistence/src/main/java" type="XMLMAPPER"/>
+                             targetProject="xnw_persistence/src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+            <property name="rootInterface" value="com.xnw.persistence.mapper.BaseMapper"/>
+        </javaClientGenerator>
 
 
 

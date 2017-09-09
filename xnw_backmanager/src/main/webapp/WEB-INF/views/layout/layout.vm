@@ -12,17 +12,16 @@
 <body>
 <div id="layout" class="ch-container">
 
+    <div class="layui-layout layui-layout-admin">
+        #parse("/common/header.vm")
 
+        #parse("/common/left_side.vm")
 
-    #parse("/common/header.vm")
-
-    #parse("/common/left_side.vm")
-
-    <div class="main-content">
-        $screen_content
+        <div class="layui-body">
+            $screen_content
+        </div>
+        #parse("/common/footer.vm")
     </div>
-    #parse("/common/footer.vm")
-
 
 </div>
 

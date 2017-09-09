@@ -24,3 +24,9 @@ nbdist/
 .nb-gradle/
 
 *.DS_Store
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+out
+gen
