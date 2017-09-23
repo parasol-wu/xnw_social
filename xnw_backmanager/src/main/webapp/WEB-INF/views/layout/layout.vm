@@ -7,7 +7,7 @@
 <head>
     #parse("/common/header_css.vm")
     #parse("/common/html_head.vm")
-
+    #parse("/common/common_js.vm")
 </head>
 <body>
 <div id="layout" class="ch-container">
@@ -24,8 +24,6 @@
     </div>
 
 </div>
-
-    #parse("/common/common_js.vm")
 
 </body>
 </html>

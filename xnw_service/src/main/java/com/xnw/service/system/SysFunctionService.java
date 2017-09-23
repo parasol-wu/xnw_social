@@ -6,6 +6,8 @@ import com.xnw.persistence.model.system.SysFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by BaoCai on 17/9/9.
  * Description:
@@ -21,5 +23,10 @@ public class SysFunctionService{
 
     public SysFunction findById(Integer id){
         return sysFunctionDao.findById(id);
+    }
+
+    public List<SysFunction> findAllFunction() {
+        List<SysFunction> result = sysFunctionDao.findAllFunction();
+        return result;
     }
 }

@@ -7,9 +7,10 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd
-           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="com.xnw.web" />
+    <context:component-scan base-package="com.xnw.web"/>
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -23,7 +24,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-     <!--velocity -->
+    <!--velocity -->
     <bean id="velocityConfig"
           class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
         <property name="resourceLoaderPath" value="/WEB-INF/views/"/>
@@ -34,7 +35,8 @@
             </props>
         </property>
     </bean>
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
         <property name="cache" value="true"/>
         <property name="prefix" value=""/>
         <!-- 取消缓存 -->
@@ -57,16 +59,19 @@
 
     <!-- jsonView -->
     <bean
-     class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-        <property name="order" value="2" />
+            class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="2"/>
         <property name="defaultViews">
             <list>
-                <bean id="mappingJsonViewExtends" class="com.xnw.web.view.MappingJsonViewExtends" />
+                <bean id="mappingJsonViewExtends" class="com.xnw.web.view.MappingJsonViewExtends"/>
             </list>
         </property>
     </bean>
 
     <mvc:resources location="/WEB-INF/static/" mapping="/static/**"/>
 
+    <mvc:interceptors>
+        <bean class="com.xnw.web.interceptor.UserFunctionInterceptor"/>
+    </mvc:interceptors>
 
 </beans>
