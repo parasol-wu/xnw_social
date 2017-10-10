@@ -1,11 +1,11 @@
 package com.xnw.utils;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.xnw.dto.system.SysFunctionDto;
 import com.xnw.persistence.model.system.SysFunction;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +22,11 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class MenuUtils {
 
+    /**
+     * Top Menu  and   left Menu
+     * @param allFunctionList
+     * @param httpServletRequest
+     */
     public static void calculateMenu(List<SysFunction> allFunctionList, HttpServletRequest httpServletRequest) {
         //topMenu
         List<SysFunction> topMenu = allFunctionList.parallelStream().filter(sysFunction -> sysFunction.getFunctionParentId()==null)
@@ -71,6 +76,33 @@ public class MenuUtils {
             map.get(sysFunction.getFunctionParentId()).add(sysFunction);
         });
         return map;
+    }
+
+    /**
+     * 当前请求路径层级关系
+     * @param currentFunction
+     * @param httpServletRequest
+     * @param functionList
+     */
+    public static void reSetCurrentUrl(SysFunction currentFunction, HttpServletRequest httpServletRequest,List<SysFunction> functionList) {
+        if(null == currentFunction){
+            //跳到首页
+            httpServletRequest.setAttribute("currentFunctionTreeInfo","1");
+            return;
+        }
+        StringBuffer currentFunctionTreeInfo = new StringBuffer();
+        while(currentFunction!=null){
+            currentFunctionTreeInfo.append(currentFunction.getId() + "--");
+            if(null == currentFunction.getFunctionParentId()){
+                break;
+            }
+            currentFunction = findParentFunction(currentFunction.getFunctionParentId(),functionList);
+        }
+        httpServletRequest.setAttribute("currentFunctionTreeInfo",currentFunctionTreeInfo.toString());
+    }
+
+    private static SysFunction findParentFunction(Integer functionParentId, List<SysFunction> functionList) {
+        return functionList.stream().filter(function -> functionParentId.equals(function.getId())).findFirst().orElse(null);
     }
 
     public static void main(String[] args){
@@ -123,4 +155,5 @@ public class MenuUtils {
 
         System.out.println(str);
     }
+
 }

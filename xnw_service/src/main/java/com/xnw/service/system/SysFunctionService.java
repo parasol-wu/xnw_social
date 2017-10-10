@@ -29,4 +29,8 @@ public class SysFunctionService{
         List<SysFunction> result = sysFunctionDao.findAllFunction();
         return result;
     }
+
+    public SysFunction findByUrl(String currentUrl) {
+        return sysFunctionDao.findByUrl(currentUrl);
+    }
 }

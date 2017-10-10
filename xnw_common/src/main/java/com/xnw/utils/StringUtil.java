@@ -1,5 +1,7 @@
 package com.xnw.utils;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * 
  * @author jared
@@ -49,5 +51,13 @@ public class StringUtil {
 			return false;
 		}
 		return true;
+	}
+
+	public static Boolean contains(String union , String subset){
+		return StringUtils.contains(union,subset);
+	}
+
+	public static void main(String[] args){
+		System.out.println(contains("123","223"));
 	}
 }

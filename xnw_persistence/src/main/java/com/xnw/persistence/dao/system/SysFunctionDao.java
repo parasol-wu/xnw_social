@@ -6,6 +6,7 @@ import com.xnw.persistence.mapper.system.SysFunctionMapper;
 import com.xnw.persistence.model.system.SysFunction;
 import com.xnw.persistence.model.system.SysFunctionConditions;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -33,5 +34,17 @@ public class SysFunctionDao{
         SysFunctionConditions.Criteria criteria = condition.createCriteria();
         criteria.andStateEqualTo(StateConstant.STATE_TRUE);
         return sysFunctionMapper.selectByExample(condition);
+    }
+
+    public SysFunction findByUrl(String currentUrl) {
+        SysFunctionConditions condition = new SysFunctionConditions();
+        SysFunctionConditions.Criteria criteria = condition.createCriteria();
+        criteria.andStateEqualTo(StateConstant.STATE_TRUE);
+        criteria.andFunctionUrlEqualTo(currentUrl);
+        List<SysFunction> list = sysFunctionMapper.selectByExample(condition);
+        if(CollectionUtils.isNotEmpty(list)){
+            return list.get(0);
+        }
+        return null;
     }
 }

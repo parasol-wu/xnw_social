@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbox>
+    <tool>
+        <key>stringUtils</key>
+        <scope>application</scope>
+        <class>com.xnw.utils.StringUtil</class>
+    </tool>
+</toolbox>

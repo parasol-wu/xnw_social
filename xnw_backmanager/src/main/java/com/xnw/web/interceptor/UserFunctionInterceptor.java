@@ -31,7 +31,10 @@ public class UserFunctionInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        String currentUrl = httpServletRequest.getRequestURI();
         List<SysFunction> functionList = sysFunctionService.findAllFunction();
+        SysFunction currentFunction = sysFunctionService.findByUrl(currentUrl);
+        MenuUtils.reSetCurrentUrl(currentFunction,httpServletRequest,functionList);
         MenuUtils.calculateMenu(functionList,httpServletRequest);
         return Boolean.TRUE;
     }

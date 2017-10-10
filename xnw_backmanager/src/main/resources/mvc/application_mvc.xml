@@ -42,7 +42,7 @@
         <!-- 取消缓存 -->
         <!--<property name="cacheLimit" value="-1"/>-->
         <property name="layoutUrl" value="layout/layout.vm"/>
-        <!--<property name="toolboxConfigLocation" value="/WEB-INF/pages/velocity/velocity-toolbox.xml"/>-->
+        <property name="toolboxConfigLocation" value="/WEB-INF/views/velocity/velocity-toolbox.xml"/>
         <property name="suffix" value=".vm"/>
         <property name="contentType" value="text/html; charset=utf-8"></property>
         <property name="exposeSpringMacroHelpers" value="true"/>

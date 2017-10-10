@@ -1,16 +1,11 @@
 <script src="../../static/js/layout.js" charset="utf-8"></script>
+<script src="../../static/js/menu.js" charset="utf-8"></script>
 <script src="../../static/js/lay/modules/element.js" charset="utf-8"></script>
 <script src="../../static/js/lay/modules/jquery.js" charset="utf-8"></script>
+<script src="../../static/js/lay/modules/jquery-1.10.2.min.js" charset="utf-8"></script>
 <script>
     //JavaScript代码区域
-    layui.use('element', function(){
-        var element = layui.element;
-
-    });
-
-    function showMenu(id){
-        alert(id);
-        $(".leftMenu").hide();
-        $("#leftmenu_"+id).show();
-    }
+//    layui.use('element', function(){
+//        var element = layui.element;
+//    });
 </script>

@@ -2,19 +2,22 @@
     <div class="layui-side-scroll">
         #foreach(${leftMenuEntry} in ${leftMenuMap.entrySet()})
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-        <ul style="display: none;" class="layui-nav layui-nav-tree leftMenu"  lay-filter="test" id="leftmenu_$!{leftMenuEntry.key}">
+        <ul #if($stringUtils.contains(${currentFunctionTreeInfo},${leftMenuEntry.key})) #else style="display: none;"  #end class="layui-nav layui-nav-tree leftMenu"  lay-filter="test" id="leftmenu_$!{leftMenuEntry.key}">
             #foreach(${leftMenu} in ${leftMenuEntry.value})
-                #if(${leftMenu.parentFunction}==false)
-                    <li class="layui-nav-item"><a href="${leftMenu.functionUrl}">${leftMenu.functionName}</a></li>
-                #end
-                #if(${leftMenu.parentFunction}!=false)
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">${leftMenu.functionName}</a>
+                #if(${leftMenu.parentFunction})
+                    <li #if($stringUtils.contains(${currentFunctionTreeInfo},${leftMenu.id})) class="layui-nav-itemed" #else class="layui-nav-item" #end >
+                        <a href="javascript:void(0)">${leftMenu.functionName}</a>
                         <dl class="layui-nav-child">
                             #foreach(${child} in ${leftMenu.childenFunctions})
-                                <dd><a href="${child.functionUrl}">${child.functionName}</a></dd>
+                                <dd #if($stringUtils.contains(${currentFunctionTreeInfo},${child.id})) class="active" #end>
+                                    <a href="${child.functionUrl}">${child.functionName}</a>
+                                </dd>
                             #end
                         </dl>
+                    </li>
+                #else
+                    <li #if($stringUtils.contains(${currentFunctionTreeInfo},${leftMenu.id})) class="layui-nav-itemed" #else class="layui-nav-item" #end >
+                        <a href="${leftMenu.functionUrl}">${leftMenu.functionName}</a>
                     </li>
                 #end
             #end

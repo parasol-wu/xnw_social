@@ -26,4 +26,9 @@ public class SysFunctionController {
         sysFunctionService.insert(sysFunction);
         return " 终于不乱吗了！";
     }
+
+    @RequestMapping("/sys_function")
+    public String function_form(){
+        return "index/index";
+    }
 }

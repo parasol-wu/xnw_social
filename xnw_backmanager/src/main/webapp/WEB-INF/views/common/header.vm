@@ -3,7 +3,7 @@
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
         #foreach(${top} in ${topMenu})
-            <li class="layui-nav-item"><a href="" onclick="showMenu(${top.id})">${top.functionName}</a></li>
+            <li class="layui-nav-item #if($stringUtils.contains(${currentFunctionTreeInfo},${top.id})) active #end"><a href="javascript:void(0)" onclick="showLeftMenu(${top.id})">${top.functionName}</a></li>
         #end
     </ul>
     <ul class="layui-nav layui-layout-right">
